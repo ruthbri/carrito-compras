@@ -29,6 +29,7 @@ Este proyecto implementa un sistema de carrito de compras con funcionalidades pa
 2. Instala las dependencias usando Composer:
    ```bash
    composer install
+   composer dump-autoload
    ```
 
 3. Costruye el contenedor:
