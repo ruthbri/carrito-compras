@@ -10,7 +10,6 @@ Este proyecto implementa un sistema de carrito de compras con funcionalidades pa
 
 - PHP >= 8.0 con las extensiones:
   - `pdo_mysql`
-  - `pdo_sqlite`
 - MySQL >= 5.7
 - Composer
 - Docker (opcional para desarrollo local)
