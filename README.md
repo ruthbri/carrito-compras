@@ -32,7 +32,7 @@ Este proyecto implementa un sistema de carrito de compras con funcionalidades pa
    composer dump-autoload
    ```
 
-3. Costruye el contenedor:
+3. Construye el contenedor:
    ```
    docker-compose build;
    docker-compose up -d
