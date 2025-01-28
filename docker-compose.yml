@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: siroko_php
+    volumes:
+      - .:/var/www/siroko-cart
+    networks:
+      - app-network
+    environment:
+      - APP_ENV=dev
+      - APP_DEBUG=1
+
+  nginx:
+    image: nginx:stable
+    container_name: siroko_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/siroko-cart
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  database:
+    image: mysql:8.0
+    container_name: siroko_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
